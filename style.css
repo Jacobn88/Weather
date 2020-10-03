@@ -1,0 +1,16 @@
+.header {
+    background-color: #20315a;
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    height: 80px;
+}
+.citySearch {
+    background-color: tomato;
+}
+.forecast {
+    background-color: yellowgreen;
+}
+.cityWeather {
+    background-color: violet;
+}
