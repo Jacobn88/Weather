@@ -6,20 +6,27 @@
     height: 80px;
 }
 .citySearch {
-    background-color: tomato;
+    padding-top: 20px;
 }
 .forecast {
     background-color: yellowgreen;
 }
 #cityWeather {
-    background-color: violet;
+    padding-top: 20px;
+    text-align: center;
 }
 .city-btn {
-    background-color: #4CAF50; /* Green background */
-    border: 1px solid green; /* Green border */
-    color: white; /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
-    width: 100%; /* Set a width if needed */
+    background-color: grey;
+    border: 1px solid black;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    width: 100%;
     display: block;
+    
+}
+#city-form {
+    padding-bottom: 10px;
+    padding-left: 20px;
 }
