@@ -33,3 +33,12 @@
 .container {
     width: 80%;
 }
+.high {
+    background-color: red;
+}
+.moderate {
+    background-color: orange;
+}
+.low {
+    background-color: green;
+}

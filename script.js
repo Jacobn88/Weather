@@ -21,6 +21,14 @@ function displayCityName() {
             method: "GET"
         }).then(function (response) {
             $(".uv").text("UV index: " + response.value);
+            var UV = response.value;
+            if (UV > 7) {
+                $(".uv").attr("class", "uv high");
+            } else if (UV > 5) {
+                $(".uv").attr("class", "uv moderate");
+            }else {
+                $(".uv").attr("class", "uv low");
+            }
         });
     })
 }
@@ -56,6 +64,14 @@ function renderWeather() {
             method: "GET"
         }).then(function (response) {
             $(".uv").text("UV index: " + response.value);
+            var UV = response.value;
+            if (UV > 7) {
+                $(".uv").attr("class", "uv high");
+            } else if (UV > 5) {
+                $(".uv").attr("class", "uv moderate");
+            }else {
+                $(".uv").attr("class", "uv low");
+            }
         });
     });
 }
@@ -83,6 +99,14 @@ $("#find-city").on("click", function (event) {
             method: "GET"
         }).then(function (response) {
             $(".uv").text("UV index: " + response.value);
+            var UV = response.value;
+            if (UV > 7) {
+                $(".uv").attr("class", "uv high");
+            } else if (UV > 5) {
+                $(".uv").attr("class", "uv moderate");
+            }else {
+                $(".uv").attr("class", "uv low");
+            }
         });
     });
 });
