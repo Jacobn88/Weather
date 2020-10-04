@@ -9,7 +9,10 @@
     padding-top: 20px;
 }
 .forecast1 {
-    background-color: yellowgreen;
+    
+}
+.forecast2 {
+    
 }
 #cityWeather {
     padding-top: 20px;
@@ -41,4 +44,7 @@
 }
 .low {
     background-color: green;
+}
+.card {
+    margin: 5px;
 }
