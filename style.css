@@ -8,7 +8,7 @@
 .citySearch {
     padding-top: 20px;
 }
-.forecast {
+.forecast1 {
     background-color: yellowgreen;
 }
 #cityWeather {
@@ -29,4 +29,7 @@
 #city-form {
     padding-bottom: 10px;
     padding-left: 20px;
+}
+.container {
+    width: 80%;
 }
