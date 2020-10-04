@@ -30,7 +30,29 @@ function displayCityName() {
                 $(".uv").attr("class", "uv low");
             }
         });
-        
+        var forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + API_KEY
+        $.ajax({
+            url: forecastURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            $(".date0").text(response.list[5].dt_txt);
+            $(".date1").text(response.list[13].dt_txt);
+            $(".date2").text(response.list[21].dt_txt);
+            $(".date3").text(response.list[29].dt_txt);
+            $(".date4").text(response.list[37].dt_txt);
+            $(".forecastTemp0").text("Temp: " + response.list[5].main.temp);
+            $(".forecastTemp1").text("Temp: " + response.list[13].main.temp);
+            $(".forecastTemp2").text("Temp: " + response.list[21].main.temp);
+            $(".forecastTemp3").text("Temp: " + response.list[29].main.temp);
+            $(".forecastTemp4").text("Temp: " + response.list[37].main.temp);
+            $(".forecastHum0").text("Humidity: " + response.list[5].main.humidity + "%");
+            $(".forecastHum1").text("Humidity: " + response.list[13].main.humidity + "%");
+            $(".forecastHum2").text("Humidity: " + response.list[21].main.humidity + "%");
+            $(".forecastHum3").text("Humidity: " + response.list[29].main.humidity + "%");
+            $(".forecastHum4").text("Humidity: " + response.list[37].main.humidity + "%");
+            
+        });
     })
 }
 // renders a button for each city in the "cities" array
