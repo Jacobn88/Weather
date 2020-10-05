@@ -1,6 +1,10 @@
 var API_KEY = "7ca00def645e760d9e5485c05171420a";
-var cities = ["Nederland", "Atlanta", "Orlando", "San Francisco", "Chicago", "Dallas", "Austin"];
+var cities = ["Atlanta", "Orlando", "San Francisco", "Chicago", "Dallas", "Houston", "Los Angeles", "Phoenix", "Philadelphia", "Jacksonville", "Austin"];
 var firstURL = "https://api.openweathermap.org/data/2.5/weather?q=Austin&units=imperial&appid=" + API_KEY;
+
+function saveCity() {
+
+}
 
 function displayCityName() {
     var cityName = $(this).attr("data-name");
@@ -9,10 +13,11 @@ function displayCityName() {
         url: displayURL,
         method: "GET"
     }).then(function (response) {
-        $(".city").html("<h1>" + response.name + " weather details</h1>");
+        $(".city").html("<h1>" + response.name + "</h1>");
         $(".temp").text("Temperature: " + response.main.temp + "F");
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
         $(".wind").text("Wind speed: " + response.wind.speed + "s");
+        $(".mainIcon").attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
         // provides UV data
         var UVurl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + API_KEY;
 
@@ -37,10 +42,15 @@ function displayCityName() {
         }).then(function (response) {
             console.log(response);
             $(".date0").text(response.list[5].dt_txt);
+            $(".icon0").attr("src", "http://openweathermap.org/img/wn/" + response.list[5].weather[0].icon + "@2x.png");
             $(".date1").text(response.list[13].dt_txt);
+            $(".icon1").attr("src", "http://openweathermap.org/img/wn/" + response.list[13].weather[0].icon + "@2x.png");
             $(".date2").text(response.list[21].dt_txt);
+            $(".icon2").attr("src", "http://openweathermap.org/img/wn/" + response.list[21].weather[0].icon + "@2x.png");
             $(".date3").text(response.list[29].dt_txt);
+            $(".icon3").attr("src", "http://openweathermap.org/img/wn/" + response.list[29].weather[0].icon + "@2x.png");
             $(".date4").text(response.list[37].dt_txt);
+            $(".icon4").attr("src", "http://openweathermap.org/img/wn/" + response.list[37].weather[0].icon + "@2x.png");
             $(".forecastTemp0").text("Temp: " + response.list[5].main.temp);
             $(".forecastTemp1").text("Temp: " + response.list[13].main.temp);
             $(".forecastTemp2").text("Temp: " + response.list[21].main.temp);
@@ -69,36 +79,36 @@ function renderButtons() {
 }
 
 // provides weather details for Austin when you first load the page
-function renderWeather() {
-    $.ajax({
-        url: firstURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-        $(".city").html("<h1>" + response.name + " weather details</h1>");
-        $(".temp").text("Temperature: " + response.main.temp + "F");
-        $(".humidity").text("Humidity: " + response.main.humidity + "%");
-        $(".wind").text("Wind speed: " + response.wind.speed + "s");
-        // provides UV data
-        var UVurl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + API_KEY;
+// function renderWeather() {
+//     $.ajax({
+//         url: firstURL,
+//         method: "GET"
+//     }).then(function (response) {
+//         console.log(response);
+//         $(".city").html("<h1>" + response.name + " weather details</h1>");
+//         $(".temp").text("Temperature: " + response.main.temp + "F");
+//         $(".humidity").text("Humidity: " + response.main.humidity + "%");
+//         $(".wind").text("Wind speed: " + response.wind.speed + "s");
+//         // provides UV data
+//         var UVurl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + API_KEY;
 
-        $.ajax({
-            url: UVurl,
-            method: "GET"
-        }).then(function (response) {
-            $(".uv").text("UV index: " + response.value);
-            var UV = response.value;
-            if (UV > 7) {
-                $(".uv").attr("class", "uv high");
-            } else if (UV > 5) {
-                $(".uv").attr("class", "uv moderate");
-            }else {
-                $(".uv").attr("class", "uv low");
-            }
-        });
+//         $.ajax({
+//             url: UVurl,
+//             method: "GET"
+//         }).then(function (response) {
+//             $(".uv").text("UV index: " + response.value);
+//             var UV = response.value;
+//             if (UV > 7) {
+//                 $(".uv").attr("class", "uv high");
+//             } else if (UV > 5) {
+//                 $(".uv").attr("class", "uv moderate");
+//             }else {
+//                 $(".uv").attr("class", "uv low");
+//             }
+//         });
         
-    });
-}
+//     });
+// }
 // provides weather deatils for city user searches
 $("#find-city").on("click", function (event) {
     event.preventDefault();
@@ -110,10 +120,11 @@ $("#find-city").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        $(".city").html("<h1>" + response.name + " weather details</h1>");
+        $(".city").html("<h1>" + response.name + "</h1>");
         $(".temp").text("Temperature: " + response.main.temp + "F");
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
         $(".wind").text("Wind speed: " + response.wind.speed + "s");
+        $(".mainIcon").attr("src", "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
 
         // provides UV data
         var UVurl = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + API_KEY;
@@ -139,10 +150,15 @@ $("#find-city").on("click", function (event) {
         }).then(function (response) {
             console.log(response);
             $(".date0").text(response.list[5].dt_txt);
+            $(".icon0").attr("src", "http://openweathermap.org/img/wn/" + response.list[5].weather[0].icon + "@2x.png");
             $(".date1").text(response.list[13].dt_txt);
+            $(".icon1").attr("src", "http://openweathermap.org/img/wn/" + response.list[13].weather[0].icon + "@2x.png");
             $(".date2").text(response.list[21].dt_txt);
+            $(".icon2").attr("src", "http://openweathermap.org/img/wn/" + response.list[21].weather[0].icon + "@2x.png");
             $(".date3").text(response.list[29].dt_txt);
+            $(".icon3").attr("src", "http://openweathermap.org/img/wn/" + response.list[29].weather[0].icon + "@2x.png");
             $(".date4").text(response.list[37].dt_txt);
+            $(".icon4").attr("src", "http://openweathermap.org/img/wn/" + response.list[37].weather[0].icon + "@2x.png");
             $(".forecastTemp0").text("Temp: " + response.list[5].main.temp);
             $(".forecastTemp1").text("Temp: " + response.list[13].main.temp);
             $(".forecastTemp2").text("Temp: " + response.list[21].main.temp);
@@ -169,5 +185,5 @@ $("#find-city").on("click", function (event) {
 
 $(document).on("click", ".city-btn", displayCityName);
 
-renderWeather();
+// renderWeather();
 renderButtons();
