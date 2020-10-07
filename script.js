@@ -2,7 +2,7 @@ const API_KEY = "7ca00def645e760d9e5485c05171420a";
 const initialCities = ["Atlanta", "Orlando", "San Francisco", "Chicago", "Dallas", "Houston", "Los Angeles", "Phoenix", "Philadelphia", "Jacksonville", "Austin"];
 
 const firstURL = "https://api.openweathermap.org/data/2.5/weather?q=Austin&units=imperial&appid=" + API_KEY;
-
+// displays weather data for user search
 function displayCityName(cityName) {
     var displayURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + API_KEY;
     $.ajax({
@@ -14,6 +14,7 @@ function displayCityName(cityName) {
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
         $(".wind").text("Wind speed: " + response.wind.speed + "s");
         $(".mainIcon").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
+        $(".description").text(response.weather[0].description);
         // provides UV data
         var UVurl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + API_KEY;
 
@@ -66,17 +67,18 @@ function displayCityName(cityName) {
         });
     })
 }
-// renders a button for each city in the "cities" array
+// adds user search to array and renders a button for each city in the array
 function addCityButtons() {
     $("#buttonsView").empty();
 
     var searchedCities = JSON.parse(localStorage.getItem("searchedCities") || "[]");
     var allCities = initialCities.concat(searchedCities);
-    displayCityName(allCities[allCities.length -1]);
+    displayCityName(allCities[allCities.length - 1]);
     for (var i = 0; i < allCities.length; i++) {
         addCityButton(allCities[i]);
     }
 }
+// adds a button for user city search
 function addCityButton(city) {
     var a = $("<button>");
     a.addClass("city-btn");
@@ -100,7 +102,7 @@ $("#find-city").on("click", function (event) {
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
         $(".wind").text("Wind speed: " + response.wind.speed + "s");
         $(".mainIcon").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
-
+        $(".description").text(response.weather[0].description);
         // provides UV data
         var UVurl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + API_KEY;
 
@@ -153,7 +155,7 @@ $("#find-city").on("click", function (event) {
         });
     });
 });
-// adds button for city user searches
+// adds user city search to local storage
 $("#find-city").on("click", function (event) {
 
     event.preventDefault();
@@ -161,17 +163,15 @@ $("#find-city").on("click", function (event) {
     $("#city-input").val("");
     addCityButton(city);
     var searchedCities = JSON.parse(localStorage.getItem("searchedCities") || "[]");
-    console.log("after parsing", searchedCities);
     searchedCities.push(city);
     localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
-    console.log("after pushing", searchedCities);
 });
-// dispays weather info when user clicks city button
+// dispays weather info when user clicks any city button
 $(document).on("click", ".city-btn", citySearch);
 
 addCityButtons();
-
-function citySearch(){
-   var cityName =  $(this).attr("data-name");
-   displayCityName(cityName);
+// renders weather info based on the user search
+function citySearch() {
+    var cityName = $(this).attr("data-name");
+    displayCityName(cityName);
 }
